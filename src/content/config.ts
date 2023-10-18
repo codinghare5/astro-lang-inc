@@ -11,6 +11,7 @@ const blogCollection = defineCollection({
         date: z.string(),
         image: z.string().optional(),
         category: z.string(),
+        style: z.enum(['conversational', 'academic', 'anecdote', 'teenager'])
     })
 })
 
