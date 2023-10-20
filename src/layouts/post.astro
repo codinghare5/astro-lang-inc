@@ -5,7 +5,9 @@ import { SITE, USE_POST_IMG_OVERLAY, USE_AUTHOR_CARD, USE_SUBSCRIPTION } from '$
 import MainLayout from '$/components/MainLayout.astro'
 import BaseHead from '$/components/BaseHead.astro'
 import Prose from '$/components/Prose.astro'
+import { getLangFromUrl } from '../i18n/utils';
 
+const lang = getLangFromUrl(Astro.url);
 interface Props {
     content: CollectionEntry<'blog'>['data'],
     stats: {
@@ -19,7 +21,7 @@ const AUTHOR_TWITTER = content.authorTwitter ? content.authorTwitter : SITE?.aut
 const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorImage ? SITE?.authorImage : ""
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
     <head>
         <BaseHead {...content} title={ content.title ? `${ SITE.title } | ${content.title}` : SITE.title }/>
     </head>

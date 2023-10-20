@@ -1,12 +1,14 @@
 ---
 import { SITE } from '$/config'
-import BaseHead from '$/components/BaseHead.astro';
-import MainLayout from '$/components/MainLayout.astro';
+import BaseHead from '$/components/BaseHead.astro'
+import MainLayout from '$/components/MainLayout.astro'
+import { getLangFromUrl } from '../i18n/utils'
 
+const lang = getLangFromUrl(Astro.url)
 const { content, showPageHeader = true } = Astro.props
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
     <head>
         <BaseHead title={ content.title ? `${ SITE.title } | ${content.title}` : SITE.title } description={ content.description } image={SITE.image}/>
     </head>
