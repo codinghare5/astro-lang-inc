@@ -11,6 +11,7 @@ tags:
 - jam-stack
 description: There's a simple secret to building a faster website — just ship less.
 style: academic
+lang: fr
 ---
 
 Malheureusement, le développement web moderne a tendance à aller dans la direction opposée—vers plus. Plus de JavaScript, plus de fonctionnalités, plus de composants mobiles, et finalement plus de complexité nécessaire pour tout faire fonctionner correctement.

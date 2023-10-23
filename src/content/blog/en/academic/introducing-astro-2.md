@@ -11,6 +11,7 @@ date: "2023-01-25T10:23:31.210Z"
 image: https://astro.build/_astro/cover_Z1RYPju.webp
 category: design
 style: academic
+lang: en
 ---
 
 Unfortunately, modern web development has been trending in the opposite direction—towards more. More JavaScript, more features, more moving parts, and ultimately more complexity needed to keep it all running smoothly.

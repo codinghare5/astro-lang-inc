@@ -5,9 +5,11 @@ import { SITE, USE_POST_IMG_OVERLAY, USE_AUTHOR_CARD, USE_SUBSCRIPTION } from '$
 import MainLayout from '$/components/MainLayout.astro'
 import BaseHead from '$/components/BaseHead.astro'
 import Prose from '$/components/Prose.astro'
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, getStyleFromUrl } from '../i18n/utils'
+import { LargeNumberLike } from 'crypto'
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url)
+const style = getStyleFromUrl(Astro.url, lang)
 interface Props {
     content: CollectionEntry<'blog'>['data'],
     stats: {

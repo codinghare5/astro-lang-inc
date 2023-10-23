@@ -1,0 +1,37 @@
+---
+export const prerender = true
+
+import { getCollection } from 'astro:content';
+import DefaultPageLayout from '$/layouts/default.astro';
+import PostPreviewList from '$/components/PostPreviewList.astro';
+import Paginator from '$/components/Paginator.astro';
+import { PAGE_SIZE } from '$/config';
+import { languages } from '$/i18n/ui';
+
+let title = 'Blog';
+let description = 'All the articles posted so far...';
+
+export async function getStaticPaths({ paginate }) {
+  const allLanguages = Object.keys(languages); // Assuming 'languages' contains your language definitions
+  const allPosts = await getCollection('blog');
+
+  // For every language, return a paginate() result.
+  // Make sure that you pass `{params: {lang}}` to `paginate()`
+  // so that Astro knows which language grouping the result is for.
+  return allLanguages.flatMap((lang) => {
+    const filteredPosts = allPosts.filter((post) => post.lang === lang); // Assuming each post has a 'lang' property
+    return paginate(filteredPosts, {
+      params: { lang },
+      pageSize: PAGE_SIZE
+    });
+  });
+}
+
+const { page } = Astro.props;
+const params = Astro.params;
+
+---
+<DefaultPageLayout content={{ title, description }}>
+    <PostPreviewList posts={page.data} />
+    <Paginator page={page} />
+</DefaultPageLayout>
