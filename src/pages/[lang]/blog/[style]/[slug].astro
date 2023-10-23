@@ -17,6 +17,22 @@ const resp = await fetch(`${import.meta.env.SITE_URI}/api/blog/views/${slug}`)
 const stats = await resp.json()
 
 const { Content } = await entry.render()
+
+export async function getStaticPaths() {
+  const pages = await getCollection('blog')
+
+  const paths = pages.map(page => {
+    const [lang, style, ...slug] = page.slug.split('/');
+    return { params: { lang, style, slug: slug.join('/') || undefined }, props: page }
+  })
+
+  return paths;
+}
+
+const page = Astro.props;
+const formattedDate = page.data.date.toLocaleString(lang);
+
+const { Content } = await page.render();
 ---
 <PostLayout content={entry.data} stats={stats}>
     <Content components={{

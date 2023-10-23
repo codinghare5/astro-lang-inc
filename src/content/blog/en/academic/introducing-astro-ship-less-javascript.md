@@ -1,15 +1,15 @@
 ---
-title: Astro 2.0 - 100% Type-safe MD and MDX Experience
+title: Introducing Astro - Ship Less JavaScript
 description: There's a simple secret to building a faster website — just ship less.
 tags:
   - astro
   - jam-stack
-  - srr
-author: Fred K Schott
+author: Fred K. Schott
 authorTwitter: FredKSchott
-date: "2023-01-25T10:23:31.210Z"
-image: https://astro.build/_astro/cover_Z1RYPju.webp
+date: "2022-09-18T13:10:23.402Z"
+image: https://images.unsplash.com/photo-1589409514187-c21d14df0d04?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80
 category: design
+style: academic
 ---
 
 Unfortunately, modern web development has been trending in the opposite direction—towards more. More JavaScript, more features, more moving parts, and ultimately more complexity needed to keep it all running smoothly.

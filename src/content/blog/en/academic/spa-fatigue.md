@@ -10,5 +10,6 @@ tags:
 - front-end
 - spa
 description: There is a sweet spot of React - in moderately interactive interfaces..
+style: academic
 ---
 https://macwright.com/2020/05/10/spa-fatigue.html

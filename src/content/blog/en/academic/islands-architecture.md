@@ -11,5 +11,6 @@ tags:
 - architecture
 - front-end
 description: Render HTML pages on the server, and inject placeholders or slots around highly dynamic regions.
+style: academic
 ---
 https://jasonformat.com/islands-architecture/
