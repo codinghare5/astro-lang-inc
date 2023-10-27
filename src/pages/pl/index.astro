@@ -1,0 +1,32 @@
+---
+export const prerender = true
+
+import { getCollection, getEntries } from 'astro:content'
+import DefaultPageLayout from '$/layouts/default.astro'
+import PostPreviewList from '$/components/PostPreviewList.astro'
+import { languages } from '$/i18n/ui'
+import { getLangFromUrl } from '$/i18n/utils'
+
+
+const title = 'Home'
+const description = 'Astro-Ink to osobisty, czysty i minimalistyczny motyw blogowy dla Astro.'
+const lang = getLangFromUrl(Astro.url)
+// const { lang } = Astro.params
+const allPosts = await getCollection('blog');
+const posts = allPosts!.filter( ( post ) => post.data.lang === lang)
+---
+<DefaultPageLayout content={{ title, description }} showPageHeader={false}>
+    <PostPreviewList posts={posts} />
+    <div class="page__actions">
+        <a class="action__go-to-blog" href="/blog" title="All Posts">All Posts &rarr;</a>
+    </div>
+</DefaultPageLayout>
+
+<style>
+    .page__actions {
+        @apply flex justify-center md:justify-end py-6
+    }
+    .action__go-to-blog {
+        @apply text-base uppercase text-gray-500 dark:text-gray-400 hover:underline
+    }
+</style>

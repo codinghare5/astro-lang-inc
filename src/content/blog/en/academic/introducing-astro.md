@@ -10,7 +10,7 @@ tags:
 - astro
 - jam-stack
 description: There's a simple secret to building a faster website — just ship less.
-style: academic
+style: "academic"
 lang: en
 ---
 
