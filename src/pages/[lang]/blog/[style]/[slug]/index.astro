@@ -9,7 +9,7 @@ import YTVideoEmbed from "$/components/mdoc/YTVideoEmbed.astro"
 import Tabs from "$/components/mdoc/Tabs/Tabs.astro"
 
 const { lang, style, slug } = Astro.params
-const entry = await getEntry('blog', `${lang}/${style}/${slug!}`)
+const entry = await getEntry(`${lang}`, `blog/${style}/${slug!}`)
 const resp = await fetch(`${import.meta.env.SITE_URI}/api/blog/views/${slug}`)
 const stats = await resp.json()
 const { Content } = await entry.render()

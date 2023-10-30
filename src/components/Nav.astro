@@ -1,6 +1,9 @@
 ---
 import { toTitleCase } from '$/utils'
 import { NAV_ITEMS } from '$/config'
+
+// const lang = getLangFromUrl(Astro.url);
+const { lang } = Astro.params
 ---
 <nav class="nav py-3">
     <ul class="nav-list dark:text-theme-dark-secondary">
@@ -8,9 +11,9 @@ import { NAV_ITEMS } from '$/config'
             Object.keys(NAV_ITEMS).map(navItemKey => <li>
                 <a class:list={[
                     `pb-1 border-b-2 hover:border-gray-400 hover:dark:border-gray-700 `,
-                    Astro.url.pathname !== NAV_ITEMS[navItemKey].path ? 'border-gray-100 dark:border-gray-800': '',
-                    Astro.url.pathname === NAV_ITEMS[navItemKey].path ? 'border-theme-primary' : ''
-                ]} href={NAV_ITEMS[navItemKey].path} title={NAV_ITEMS[navItemKey].title}>{toTitleCase(NAV_ITEMS[navItemKey].title)}</a>
+                    Astro.url.pathname !== `/${lang}${NAV_ITEMS[navItemKey].path}` ? 'border-gray-100 dark:border-gray-800': '',
+                    Astro.url.pathname === `/${lang}${NAV_ITEMS[navItemKey].path}` ? 'border-theme-primary' : ''
+                ]} href={`/${lang}${NAV_ITEMS[navItemKey].path}`} title={NAV_ITEMS[navItemKey].title}>{toTitleCase(NAV_ITEMS[navItemKey].title)}</a>
             </li>)
         }
     </ul>

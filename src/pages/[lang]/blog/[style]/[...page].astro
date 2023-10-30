@@ -22,7 +22,8 @@ export async function getStaticPaths({ paginate }) {
   // so that Astro knows which language grouping the result is for.
   return allLanguages.flatMap((lang) => {
     return allStyles.flatMap((style) => {
-      const filteredPosts = allPosts.filter((post) => post.data.lang === lang && post.data.style === style); // Assuming each post has a 'lang' property
+      // TODO: translated styles, check lang[style]
+      const filteredPosts = allPosts.filter((post) => post.data.lang === lang && post.data.style === style);
       return paginate(filteredPosts, {
         params: { lang, style },
         pageSize: PAGE_SIZE
@@ -32,6 +33,7 @@ export async function getStaticPaths({ paginate }) {
 
 }
 
+// page -> should be post?
 const { page } = Astro.props;
 const params = Astro.params;
 

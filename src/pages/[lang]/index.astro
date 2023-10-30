@@ -1,20 +1,32 @@
 ---
+import type { GetStaticPaths } from "astro";
 export const prerender = true
 
-import { getCollection, getEntries } from 'astro:content'
+import { getCollection, getEntryBySlug } from 'astro:content'
 import DefaultPageLayout from '$/layouts/default.astro'
 import PostPreviewList from '$/components/PostPreviewList.astro'
-import { languages } from '$/i18n/ui'
 import { getLangFromUrl } from '$/i18n/utils'
 
-
 const title = 'Home'
-const description = 'Astro-Ink to osobisty, czysty i minimalistyczny motyw blogowy dla Astro.'
-const lang = getLangFromUrl(Astro.url)
-// const { lang } = Astro.params
-const allPosts = await getCollection('blog');
-const posts = allPosts!.filter( ( post ) => post.data.lang === lang)
+const description = 'Astro-Ink is a crisp, minimal, personal blog theme for Astro'
+
+export async function getStaticPaths() {
+    const allPosts = await getCollection('blog')
+    const paths = allPosts.map(page => {
+        const [lang,] = page.slug.split('/');
+        const posts = allPosts.filter((post) => post.data.lang === lang)
+    return { params: { lang }, props: { page, posts }}
+  })
+
+  return paths;
+}
+
+const { lang } = Astro.params
+const { page, posts } = Astro.props
 ---
+<!-- <section>
+    {language}
+</section> -->
 <DefaultPageLayout content={{ title, description }} showPageHeader={false}>
     <PostPreviewList posts={posts} />
     <div class="page__actions">

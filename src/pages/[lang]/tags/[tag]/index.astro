@@ -13,9 +13,10 @@ export async function getStaticPaths({ }) {
   })
 
   return Array.from(allTags).map((tag) => {
-    const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag))
+    const filteredPosts = allPosts.filter((post) => post.data.lang === post.slug.split('/')[0] && post.data.tags.includes(tag))
+    const lang = filteredPosts[0].data.lang
     return {
-      params: { tag },
+      params: { lang, tag },
       props: {
           pages: filteredPosts
       }
@@ -24,7 +25,7 @@ export async function getStaticPaths({ }) {
 }
 
 const { pages } = Astro.props
-const { tag } = Astro.params
+const { lang, tag } = Astro.params
 ---
 
 <DefaultPageLayout content={{ title: `Posts by Tag: ${tag}`, description: `all of the articles we have posted and linked so far under the tag: ${tag}` }}>

@@ -23,18 +23,21 @@ const blogPosts = defineCollection({
     schema: postSchema
 })
 
-const blogEnAcademicCollection = defineCollection({
-    path: '/blog/en/academic/*.md',
+const enCollection = defineCollection({
     schema: postSchema
 })
 
-const frBlogAcademic = defineCollection({
-    path: '/blog/fr/academic/*.md',
+const frCollection = defineCollection({
+    schema: postSchema
+})
+
+const plCollection = defineCollection({
     schema: postSchema
 })
 
 export const collections = {
-    'blog/en/academic': blogEnAcademicCollection,
-    'frblog-academic': frBlogAcademic,
+    'en': enCollection,
+    'fr': frCollection,
+    'pl': plCollection,
     'blog': blogCollection
 }
