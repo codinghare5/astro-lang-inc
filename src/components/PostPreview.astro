@@ -2,8 +2,10 @@
 import type { CollectionEntry } from 'astro:content'
 import { getMonthName } from '$/utils'
 
+const { lang } = Astro.params
+
 interface Props {
-    post: CollectionEntry<'blog'>
+    post: CollectionEntry<`${lang}`>
 }
 
 const { post: { data: post, slug } } = Astro.props
@@ -17,7 +19,7 @@ const { post: { data: post, slug } } = Astro.props
     </div>
     <div class="flex-1">
         <h4 class="post-preview__title dark:text-theme-dark-primary">
-            <a href={`/blog/${slug}`} title={post.title}>{post.title}</a>
+            <a href={`/${lang}/${slug}`} title={post.title}>{post.title}</a>
         </h4>
         <p class="post-preview__desc">
             {post.description}

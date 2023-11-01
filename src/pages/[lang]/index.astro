@@ -5,24 +5,42 @@ export const prerender = true
 import { getCollection, getEntryBySlug } from 'astro:content'
 import DefaultPageLayout from '$/layouts/default.astro'
 import PostPreviewList from '$/components/PostPreviewList.astro'
-import { getLangFromUrl } from '$/i18n/utils'
+import { PAGE_SIZE } from '$/config';
+import { languages, styles } from '$/i18n/ui';
 
 const title = 'Home'
 const description = 'Astro-Ink is a crisp, minimal, personal blog theme for Astro'
 
 export async function getStaticPaths() {
-    const allPosts = await getCollection('blog')
-    const paths = allPosts.map(page => {
-        const [lang,] = page.slug.split('/');
-        const posts = allPosts.filter((post) => post.data.lang === lang)
-    return { params: { lang }, props: { page, posts }}
-  })
+    const allLanguages = Object.keys(languages)
 
-  return paths;
+    async function asyncFlatMap(arr, asyncFn) {
+        return Promise.all(flatten(await asyncMap(arr, asyncFn)))
+    }
+
+    function asyncMap(arr, asyncFn) {
+        return Promise.all(arr.map(asyncFn))
+    }
+    function flatMap(arr, fn) {
+        return flatten(arr.map(fn))
+    }
+
+    function flatten(arr) {
+        return [].concat(...arr)
+    }
+
+    return Promise.all(await asyncFlatMap( allLanguages, async (lang) => {
+        const posts = await getCollection(`${lang}`)
+        const paths = await asyncFlatMap(posts, async (post) => {
+            return { params: { lang, slug: post.slug || undefined }, props: { posts }}
+        })
+        
+        return paths;
+    }))
 }
 
-const { lang } = Astro.params
-const { page, posts } = Astro.props
+const { posts } = Astro.props;
+const { lang, slug } = Astro.params;
 ---
 <!-- <section>
     {language}
@@ -30,7 +48,7 @@ const { page, posts } = Astro.props
 <DefaultPageLayout content={{ title, description }} showPageHeader={false}>
     <PostPreviewList posts={posts} />
     <div class="page__actions">
-        <a class="action__go-to-blog" href="/blog" title="All Posts">All Posts &rarr;</a>
+        <a class="action__go-to-blog" href={`${lang}/blog`} title="All Posts">All Posts &rarr;</a>
     </div>
 </DefaultPageLayout>
 
