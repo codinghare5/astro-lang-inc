@@ -14,13 +14,24 @@ const postSchema = z.object({
     lang: z.string(),
 })
 
+const aboutSchema = z.object({
+    title: z.string().max(100, 'The title length must be less than or equal to 100 chars'),
+    description: z.string(),
+    // author: z.string(),
+    // authorImage: z.string().optional(),
+    // authorTwitter: z.string(),
+    // image: z.string().optional(),
+    style: z.enum(['conversational', 'academic', 'anecdote', 'teenager']),
+    lang: z.string(),
+})
+
 const blogCollection = defineCollection({
     type: 'content',
     schema: postSchema
 })
 
-const blogPosts = defineCollection({
-    schema: postSchema
+const aboutCollection = defineCollection({
+    schema: aboutSchema
 })
 
 const enCollection = defineCollection({
@@ -39,5 +50,6 @@ export const collections = {
     'en': enCollection,
     'fr': frCollection,
     'pl': plCollection,
-    'blog': blogCollection
+    'blog': blogCollection,
+    'about': aboutCollection,
 }

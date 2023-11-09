@@ -10,7 +10,7 @@ const client = new Map<string, number>()
 // Supabase,
 const getViewsBySlug = async (slug: string): Promise<number> =>  {
     if(slug) {
-        const prevValue = await client.get(slug)
+        const prevValue = await client.GET(slug)
         let newValue = 1
         if(prevValue) {
             newValue = parseInt(prevValue) + 1
@@ -24,7 +24,7 @@ const getViewsBySlug = async (slug: string): Promise<number> =>  {
     }
 }
 
-export const get: APIRoute = async ({ params, request}) => {
+export const GET: APIRoute = async ({ params, request}) => {
     return {
         body: JSON.stringify({
             views: await getViewsBySlug(params.slug!)

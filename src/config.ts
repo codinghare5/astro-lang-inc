@@ -6,19 +6,19 @@ export const NAV_ITEMS: NavItems = {
         title: 'home'
     },
     blog: {
-        path: '/blog',
+        path: '/blog/',
         title: 'blog'
     },
     tags: {
-        path: '/tags',
+        path: '/tags/',
         title: 'tags'
     },
     media: {
-        path: '/media',
+        path: '/media/',
         title: 'media'
     },
     about: {
-        path: '/about',
+        path: '/about/',
         title: 'about'
     }
 }
