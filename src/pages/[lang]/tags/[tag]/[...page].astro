@@ -6,31 +6,41 @@ import { PAGE_SIZE } from '$/config'
 import DefaultPageLayout from '$/layouts/default.astro'
 import PostPreviewList from '$/components/PostPreviewList.astro'
 import Paginator from '$/components/Paginator.astro'
+import { languages } from '$/i18n/ui'
 
 let title = 'Posts By Tags'
 let description = 'All the articles posted so far...'
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await getCollection('blog')
-  const allTags = new Set<string>()
-  allPosts.map(post => {
-      post.data.tags && post.data.tags.map(tag => allTags.add(tag.toLowerCase()))
-  })
+  const allLanguages = Object.keys(languages); // Assuming 'languages' contains your language definitions
 
-  return Array.from(allTags).map((tag) => {
-    const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag))
-    return paginate(filteredPosts, {
-      params: { tag },
-      pageSize: PAGE_SIZE
+  const allPosts = await getCollection('blog')
+
+  // Collect all tags across all languages
+  const allTags = new Set();
+  allPosts.forEach((post) => {
+    post.data.tags && post.data.tags.map((tag) => allTags.add(tag.toLowerCase()));
+  });
+
+  // Filter and paginate posts by tag for each language
+  const paths = Array.from(allTags).flatMap((tag) => {
+    return allLanguages.flatMap((lang) => {
+      const filteredPosts = allPosts.filter(
+        (post) => post.lang === lang && post.data.tags.includes(tag)
+      );
+      // Paginate the filtered posts
+      return paginate(filteredPosts, {
+        params: { lang, tag },
+        pageSize: PAGE_SIZE,
+      });
     });
   });
+
+  return paths;
 }
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
-type Props =  InferGetStaticPropsType<typeof getStaticPaths>;
-
-const { page } = Astro.props as Props
-const { tag } = Astro.params as Params
+const { lang, tag } = Astro.params
+const { page } = Astro.props
 ---
 
 <DefaultPageLayout content={{ title: `Posts by Tag: ${tag}`, description: `all of the articles we have posted and linked so far under the tag: ${tag}` }}>

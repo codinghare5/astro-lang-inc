@@ -12,12 +12,13 @@ let title = 'All Tags'
 let description = 'All the tags used so far...'
 
 export async function getStaticPaths() {
-    const allPosts = await getCollection('blog')
-    const paths = allPosts.map(page => {
-        const [lang,] = page.slug.split('/');
-        const filteredPosts = allPosts.filter((post) => post.data.lang === lang)
-        const tags = [...new Set([].concat.apply([], filteredPosts.map(post => post.data.tags)))]
-    return { params: { lang }, props: { page, tags }}
+  const allPosts = await getCollection('blog')
+  const paths = allPosts.map(page => {
+		const [lang,] = page.slug.split('/');
+		const filteredPosts = allPosts.filter((post) => post.data.lang === lang)
+		const tags = [...new Set([].concat.apply([], filteredPosts.map(post => post.data.tags)))]
+    
+		return { params: { lang }, props: { page, tags }}
   })
 
   return paths;

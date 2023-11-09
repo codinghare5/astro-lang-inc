@@ -14,19 +14,17 @@ let description = 'All the articles posted so far...';
 export async function getStaticPaths({ paginate }) {
   const allLanguages = Object.keys(languages); // Assuming 'languages' contains your language definitions
   const allStyles = Object.keys(styles); // All'styles' definitions
+  const allPosts = await getCollection('blog')
 
-  const allPosts = await getCollection('blog');
-
-  // For every language, return a paginate() result.
-  // Make sure that you pass `{params: {lang}}` to `paginate()`
-  // so that Astro knows which language grouping the result is for.
-  return allLanguages.flatMap((lang) => {
+  const awaitedPosts = allLanguages.map((lang) => {
     const filteredPosts = allPosts.filter((post) => post.data.lang === lang); // Assuming each post has a 'lang' property
     return paginate(filteredPosts, {
       params: { lang },
       pageSize: PAGE_SIZE
     });
-  });
+  })
+
+  return awaitedPosts.flat()
 }
 
 const { page } = Astro.props;

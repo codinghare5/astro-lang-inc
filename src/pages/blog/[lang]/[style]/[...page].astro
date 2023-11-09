@@ -1,12 +1,12 @@
 ---
 export const prerender = true
 
-import { getCollection } from 'astro:content';
 import DefaultPageLayout from '$/layouts/default.astro';
 import PostPreviewList from '$/components/PostPreviewList.astro';
 import Paginator from '$/components/Paginator.astro';
 import { PAGE_SIZE } from '$/config';
 import { languages, styles } from '$/i18n/ui';
+import { getCollection } from 'astro:content';
 
 let title = 'Blog';
 let description = 'All the articles posted so far...';
@@ -14,23 +14,20 @@ let description = 'All the articles posted so far...';
 export async function getStaticPaths({ paginate }) {
   const allLanguages = Object.keys(languages); // Assuming 'languages' contains your language definitions
   const allStyles = Object.keys(styles); // All'styles' definitions
+  const allPosts = await getCollection('blog')
 
-  const allPosts = await getCollection('blog');
-
-  // For every language, return a paginate() result.
-  // Make sure that you pass `{params: {lang}}` to `paginate()`
-  // so that Astro knows which language grouping the result is for.
-  return allLanguages.flatMap((lang) => {
-    return allStyles.flatMap((style) => {
-      // TODO: translated styles, check lang[style]
-      const filteredPosts = allPosts.filter((post) => post.data.lang === lang && post.data.style === style);
-      return paginate(filteredPosts, {
-        params: { lang, style },
-        pageSize: PAGE_SIZE
+  const awaitedPosts = allLanguages.map((lang) => {
+      return allStyles.flatMap((style) => {
+        // TODO: translated styles, check lang[style]
+        const filteredPosts = allPosts.filter((post) => post.data.lang === lang && post.data.style === style);
+        return paginate(filteredPosts, {
+          params: { lang, style },
+          pageSize: PAGE_SIZE
+        });
       });
-    });
-  });
+    })
 
+  return awaitedPosts.flat()
 }
 
 // page -> should be post?

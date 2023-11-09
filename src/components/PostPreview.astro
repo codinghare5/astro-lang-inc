@@ -5,7 +5,7 @@ import { getMonthName } from '$/utils'
 const { lang } = Astro.params
 
 interface Props {
-    post: CollectionEntry<`${lang}`>
+    post: CollectionEntry<'blog'>
 }
 
 const { post: { data: post, slug } } = Astro.props
