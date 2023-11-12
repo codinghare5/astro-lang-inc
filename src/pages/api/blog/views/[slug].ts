@@ -10,7 +10,7 @@ const client = new Map<string, number>()
 // Supabase,
 const getViewsBySlug = async (slug: string): Promise<number> =>  {
     if(slug) {
-        const prevValue = await client.GET(slug)
+        const prevValue = await client.get(slug)
         let newValue = 1
         if(prevValue) {
             newValue = parseInt(prevValue) + 1

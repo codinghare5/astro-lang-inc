@@ -1,0 +1,28 @@
+---
+import { getEntry } from "astro:content"
+import PostLayout from '$/layouts/about.astro'
+
+import Callout from "$/components/mdoc/Callout.astro"
+import Link from "$/components/mdoc/Link.astro"
+import TweetEmbed from "$/components/mdoc/TweetEmbed.astro"
+import YTVideoEmbed from "$/components/mdoc/YTVideoEmbed.astro"
+import Tabs from "$/components/mdoc/Tabs/Tabs.astro"
+
+const { lang } = Astro.params
+const entry = await getEntry('about', `${lang}`)
+const stats = 1
+const { Content } = await entry.render()
+---
+<!-- <section>
+  {JSON.stringify({entry})}
+</section> -->
+
+<PostLayout content={entry.data} stats={stats}>
+    <Content components={{
+        Callout,
+        Link,
+        TweetEmbed,
+        YTVideoEmbed,
+        Tabs
+    }}/>
+</PostLayout>

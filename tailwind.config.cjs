@@ -33,6 +33,9 @@ module.exports = {
                         'blockquote > p::before, p::after': {
                             color: colors.primary,
                         },
+                        strong: {
+                            color: theme('colors.indigo.400'),
+                        },
                     },
                 },
                 DEFAULT: {

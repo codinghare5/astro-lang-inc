@@ -14,9 +14,6 @@ style: "academic"
 lang: pl
 ---
 
-Here's the translated text in Polish:
-
-'''markdown
 Niestety, współczesny rozwój stron internetowych podąża w przeciwnym kierunku – w stronę większej ilości. Więcej JavaScriptu, więcej funkcji, więcej ruchomych części, a ostatecznie więcej złożoności potrzebnej do płynnego działania.
 
 Dziś z radością dzielę się publicznie o Astro: nowym rodzajem narzędzia do tworzenia statycznych stron, które dostarcza błyskawiczną wydajność w połączeniu z nowoczesnym doświadczeniem dla programistów. Projektując Astro, pożyczyliśmy najlepsze części naszych ulubionych narzędzi, a następnie dodaliśmy kilka naszych własnych innowacji, w tym:

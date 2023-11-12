@@ -1,5 +1,4 @@
 ---
-
 title: How to Create and Successfully Monetize Digital Products for as much as $10,000
 date: "2023-10-29"
 image: https://images.unsplash.com/photo-1589409514187-c21d14df0d04?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80
