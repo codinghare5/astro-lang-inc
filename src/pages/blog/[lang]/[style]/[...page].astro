@@ -6,10 +6,8 @@ import PostPreviewList from '$/components/PostPreviewList.astro';
 import Paginator from '$/components/Paginator.astro';
 import { PAGE_SIZE } from '$/config';
 import { languages, styles } from '$/i18n/ui';
+import { useTranslations } from '$/i18n/utils'
 import { getCollection } from 'astro:content';
-
-let title = 'Blog';
-let description = 'All the articles posted so far...';
 
 export async function getStaticPaths({ paginate }) {
   const allLanguages = Object.keys(languages); // Assuming 'languages' contains your language definitions
@@ -32,14 +30,13 @@ export async function getStaticPaths({ paginate }) {
 
 // page -> should be post?
 const { page } = Astro.props;
-const params = Astro.params;
+const { lang } = Astro.params;
+
+let title = 'Blog';
+const t = useTranslations(lang)
+let description = t('blog.description');
 
 ---
-<!-- <section>
-  <ul>
-    {filteredPosts.map((post) => <li>post.data.slug</li>)}
-  </ul>
-</section> -->
 
 <DefaultPageLayout content={{ title, description }}>
     <PostPreviewList posts={page.data} />

@@ -11,13 +11,18 @@ export const ui = {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.twitter': 'Twitter',
+    'blog.description': 'All the articles posted so far...',
+    'blog.languages': 'All the languages so far...',
+
   },
   fr: {
     'nav.home': 'Accueil',
     'nav.about': 'À propos',
+    'blog.languages': "Tous les langues publiés jusqu'à présent...",
   },
   pl: {
     'nav.about': 'O mnie',
+    'blog.languages': 'Wszystkie języki do tej pory...',
   },
 } as const;
 
