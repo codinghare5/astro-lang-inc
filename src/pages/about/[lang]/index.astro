@@ -13,9 +13,6 @@ const entry = await getEntry('about', `${lang}`)
 const stats = 1
 const { Content } = await entry.render()
 ---
-<!-- <section>
-  {JSON.stringify({entry})}
-</section> -->
 
 <PostLayout content={entry.data} stats={stats}>
     <Content components={{

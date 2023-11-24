@@ -3,11 +3,7 @@ export const prerender = true
 
 import { getCollection } from 'astro:content';
 import DefaultPageLayout from '$/layouts/default.astro'
-import { languages } from '$/i18n/ui'
-
-// TODO: get translations for title and description
-let title = 'All Tags'
-let description = 'All the tags used so far...'
+import { useTranslations } from '$/i18n/utils'
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog')
@@ -24,6 +20,12 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params
 const { page, tags } = Astro.props
+
+
+// TODO: get translations for title and description
+const t = useTranslations(lang)
+let title = t('blog.tags.title')
+let description = t('blog.tags.description');
 ---
 
 <DefaultPageLayout content={{ title, description }}>
