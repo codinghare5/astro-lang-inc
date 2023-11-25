@@ -34,22 +34,7 @@ const aboutCollection = defineCollection({
     schema: aboutSchema
 })
 
-const enCollection = defineCollection({
-    schema: postSchema
-})
-
-const frCollection = defineCollection({
-    schema: postSchema
-})
-
-const plCollection = defineCollection({
-    schema: postSchema
-})
-
 export const collections = {
-    'en': enCollection,
-    'fr': frCollection,
-    'pl': plCollection,
     'blog': blogCollection,
     'about': aboutCollection,
 }

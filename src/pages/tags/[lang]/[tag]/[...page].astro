@@ -1,15 +1,12 @@
 ---
 export const prerender = true
-import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro'
 import { getCollection } from 'astro:content'
 import { PAGE_SIZE } from '$/config'
 import DefaultPageLayout from '$/layouts/default.astro'
 import PostPreviewList from '$/components/PostPreviewList.astro'
 import Paginator from '$/components/Paginator.astro'
 import { languages } from '$/i18n/ui'
-
-let title = 'Posts By Tags'
-let description = 'All the articles posted so far...'
+import { useTranslations } from '$/i18n/utils'
 
 export async function getStaticPaths({ paginate }) {
   const allLanguages = Object.keys(languages); // Assuming 'languages' contains your language definitions
@@ -41,9 +38,13 @@ export async function getStaticPaths({ paginate }) {
 
 const { lang, tag } = Astro.params
 const { page } = Astro.props
+
+const t = useTranslations(lang)
+let title = t('blog.tag.title')
+let description = t('blog.tag.description')
 ---
 
-<DefaultPageLayout content={{ title: `Posts by Tag: ${tag}`, description: `all of the articles we have posted and linked so far under the tag: ${tag}` }}>
+<DefaultPageLayout content={{ title: `${title} ${tag}`, description: `${description} ${tag}` }}>
     <PostPreviewList posts={page.data} />
     <Paginator page={page} />
 </DefaultPageLayout>

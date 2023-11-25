@@ -15,6 +15,8 @@ export const ui = {
     'blog.languages': 'All the languages so far...',
     'blog.tags.description': 'All the tags so far...',
     'blog.tags.title': 'Tags',
+    'blog.tag.description': 'all of the articles we have posted and linked so far under the tag:',
+    'blog.tag.title': 'Posts by Tag:',
   },
   fr: {
     'nav.home': 'Accueil',
@@ -23,7 +25,8 @@ export const ui = {
     'blog.languages': "Tous les langues publiés jusqu'à présent...",
     'blog.tags.description': "Tous les tags utilisés jusqu'à présent...",
     'blog.tags.title': "Tags",
-
+    'blog.tag.description': "tous les articles que nous avons postés et liés jusqu'à présent sous le tag :",
+    'blog.tag.title': "Postes par Tag :",
   },
   pl: {
     'nav.about': 'O mnie',
@@ -31,6 +34,8 @@ export const ui = {
     'blog.languages': 'Wszystkie języki do tej pory...',
     'blog.tags.description': "Wszystkie tagi do tej pory...",
     'blog.tags.title': "Tagi",
+    'blog.tag.description': "Wszystkie artykuły przesłane i podpięte pod tagiem: ",
+    'blog.tag.title': "Posty po tagu:",
   },
 } as const;
 

@@ -4,6 +4,7 @@ export const prerender = true
 import DefaultPageLayout from '$/layouts/default.astro'
 import PostPreviewList from '$/components/PostPreviewList.astro'
 import { getCollection } from 'astro:content'
+import { useTranslations } from '$/i18n/utils'
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog')
@@ -29,8 +30,12 @@ export async function getStaticPaths() {
 
 const { posts } = Astro.props
 const { lang, tag } = Astro.params
+
+const t = useTranslations(lang)
+let title = t('blog.tag.title')
+let description = t('blog.tag.description')
 ---
 
-<DefaultPageLayout content={{ title: `Posts by Tag: ${tag}`, description: `all of the articles we have posted and linked so far under the tag: ${tag}` }}>
+<DefaultPageLayout content={{ title: `${title} ${tag}`, description: `${description} ${tag}` }}>
     <PostPreviewList posts={posts} />
 </DefaultPageLayout>

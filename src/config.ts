@@ -25,11 +25,11 @@ export const NAV_ITEMS: NavItems = {
 
 export const SITE = {
     // Your site's detail?
-    name: 'Ink',
-    title: 'Astro - Ink',
-    description: 'Crisp, minimal, personal blog theme for Astro',
+    name: 'Lang Ink',
+    title: 'Astro - Lang - Ink',
+    description: 'Crisp, minimal, personal, multilingual blog theme for Astro',
     url: 'https://astro-ink.vercel.app',
-    githubUrl: 'https://github.com/one-aalam/astro-ink',
+    githubUrl: 'https://github.com/codinghare5/astro-lang-inc',
     listDrafts: true,
     image: 'https://raw.githubusercontent.com/one-aalam/astro-ink/main/public/astro-banner.png',
     // YT video channel Id (used in media.astro)
